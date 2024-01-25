@@ -31,17 +31,24 @@ public class InversionOfControl {
 
     private Coach myCoach;
 
+    private Coach anotherCoach;
+
     @Autowired
-    public void setMethod(@Qualifier("basketBallCoach") Coach coach){
+    public void setMethod(
+            @Qualifier("basketBallCoach") Coach coach,
+            @Qualifier("basketBallCoach") Coach anotherCoach
+
+    ){
         System.out.println("In constructor = IOC");
         this.myCoach = coach;
+        this.anotherCoach = anotherCoach;
     }
 
-    //for primary qualifier - Cricket Coach
-    @Autowired
-    public void setMethods(Coach coach){
-        this.myCoach = coach;
-    }
+    //for primary qualifier - Cricket Coach - no need give qualifier annotation
+//    @Autowired
+//    public void setMethods(Coach coach){
+//        this.myCoach = coach;
+//    }
 
     //field injection - which is available in legacy/old projects
 //    @Autowired
@@ -54,7 +61,11 @@ public class InversionOfControl {
     @GetMapping("/getworkout")
     public String getworkoutcontroller(){
 
-        return myCoach.getWorkout() + outsideClassRead.fromotherclass;
+        return myCoach.getWorkout()+" - " + outsideClassRead.fromotherclass ;
+    }
+    @GetMapping("/check")
+    public String getBeanScope(){
+        return "Bean Scope Type - "+ (myCoach == anotherCoach);
     }
 
 }
