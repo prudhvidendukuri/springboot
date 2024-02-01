@@ -64,7 +64,7 @@ public class Application {
 
 
 			System.out.println("delete using query");
-//			studentDao.deleteStudent(7);
+//
 
 			System.out.println("---DELETED---");
 
